@@ -65,6 +65,7 @@ export default function Tabs() {
   const optionsHome = useMemo(
     () => ({
       title: 'Главная',
+      headerShown: false,
       tabBarIcon: ({color, size}: any) => (
         <SvgHome width={size} height={size} fill={color} />
       ),

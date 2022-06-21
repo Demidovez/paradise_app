@@ -9,7 +9,12 @@ moment.locale('ru-RU');
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar animated={true} barStyle="dark-content" />
+      <StatusBar
+        animated={true}
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent={true}
+      />
       <Navigate />
       <ToastContainer />
     </SafeAreaView>
