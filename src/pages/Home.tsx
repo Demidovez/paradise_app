@@ -22,10 +22,10 @@ function HomePage() {
       <Text style={styles.h2}>По подписке</Text>
       <ListPaydLibrary />
       <Text style={styles.h2}>Подпишись</Text>
-      <Button title="Чат в телеграм" />
+      {/* <Button title="Чат в телеграм" />
       <Button title="Инстаграм" />
       <Text>Публичная оферта</Text>
-      <Text>Политика конфиденциальности</Text>
+      <Text>Политика конфиденциальности</Text> */}
     </View>
   );
 }
@@ -35,15 +35,13 @@ export default React.memo(HomePage);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#edf0f5',
-    paddingStart: 12,
-    paddingEnd: 12,
+    backgroundColor: 'white',
   },
   logoWrapper: {
     alignContent: 'center',
     alignItems: 'center',
-    paddingBottom: 40,
-    paddingTop: 40,
+    paddingBottom: 60,
+    paddingTop: 80,
   },
   logo: {
     width: '70%',
@@ -53,13 +51,17 @@ const styles = StyleSheet.create({
   },
   h1: {
     ...Style.font_bold,
-    fontSize: 19,
-    paddingBottom: 12,
+    fontSize: 22,
+    paddingBottom: 20,
+    paddingStart: 20,
+    paddingEnd: 20,
   },
   h2: {
     ...Style.font_bold,
-    fontSize: 16,
-    paddingTop: 12,
-    paddingBottom: 12,
+    fontSize: 20,
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingStart: 20,
+    paddingEnd: 20,
   },
 });
