@@ -72,6 +72,16 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Merriweather-Bold.ttf</string>
+		<string>Merriweather-Light.ttf</string>
+		<string>Merriweather-Regular.ttf</string>
+		<string>MontserratAlternates-Bold.ttf</string>
+		<string>MontserratAlternates-ExtraLight.ttf</string>
+		<string>MontserratAlternates-Light.ttf</string>
+		<string>MontserratAlternates-Medium.ttf</string>
+		<string>MontserratAlternates-Regular.ttf</string>
+		<string>MontserratAlternates-SemiBold.ttf</string>
+		<string>MontserratAlternates-Thin.ttf</string>
 	</array>
 </dict>
 </plist>

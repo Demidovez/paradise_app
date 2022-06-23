@@ -1,13 +1,25 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image, Button, Dimensions} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  StatusBar,
+  Dimensions,
+} from 'react-native';
 import ListClubFeatures from '../components/ListClubFeatures';
 import ListFreeLibrary from '../components/ListFreeLibrary';
 import ListPaydLibrary from '../components/ListPaydLibrary';
 import Style from '../style/Light';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 function HomePage() {
   return (
     <View style={styles.container}>
+      <View style={styles.settings}>
+        <Icon name="bell" color="#505050" size={30} style={styles.icon} />
+        <Icon name="settings" color="#505050" size={30} style={styles.icon} />
+      </View>
       <View style={styles.logoWrapper}>
         <Image
           source={require('../../assets/images/logo.png')}
@@ -36,6 +48,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  settings: {
+    position: 'absolute',
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    marginTop: StatusBar.currentHeight || 0,
+    paddingEnd: 10,
+  },
+  icon: {
+    padding: 15,
+    paddingTop: 10,
   },
   logoWrapper: {
     alignContent: 'center',
