@@ -47,7 +47,7 @@ function ListClubFeatures() {
       },
       {
         title: 'Чат',
-        icon: 'message',
+        icon: 'chat',
         color: '#f1e7ff',
         colorIcon: '#7245B1',
       },

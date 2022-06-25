@@ -6,16 +6,20 @@ import {
   Image,
   StatusBar,
   Dimensions,
+  ScrollView,
+  Button,
 } from 'react-native';
 import ListClubFeatures from '../components/ListClubFeatures';
 import ListFreeLibrary from '../components/ListFreeLibrary';
 import ListPaydLibrary from '../components/ListPaydLibrary';
 import Style from '../style/Light';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Emoji from 'react-native-emoji';
+import SocialButtons from '../components/SocialButtons';
 
 function HomePage() {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.settings}>
         <Icon name="bell" color="#505050" size={30} style={styles.icon} />
         <Icon name="settings" color="#505050" size={30} style={styles.icon} />
@@ -29,16 +33,25 @@ function HomePage() {
       </View>
       <Text style={styles.h1}>Клуб Финансового Рая</Text>
       <ListClubFeatures />
-      <Text style={styles.h2}>Бесплатно</Text>
+      <View style={styles.h2_wrapper}>
+        <Emoji name="gift" style={{fontSize: 25}} />
+        <Text style={styles.h2}>Бесплатно</Text>
+      </View>
+
       <ListFreeLibrary />
-      <Text style={styles.h2}>По подписке</Text>
+      <View style={styles.h2_wrapper}>
+        <Emoji name="trophy" style={{fontSize: 25}} />
+        <Text style={styles.h2}>По подписке</Text>
+      </View>
       <ListPaydLibrary />
-      <Text style={styles.h2}>Подпишись</Text>
-      {/* <Button title="Чат в телеграм" />
-      <Button title="Инстаграм" />
+      <View style={styles.h2_wrapper}>
+        <Emoji name="wave" style={{fontSize: 25}} />
+        <Text style={styles.h2}>Подпишись</Text>
+      </View>
+      <SocialButtons />
       <Text>Публичная оферта</Text>
-      <Text>Политика конфиденциальности</Text> */}
-    </View>
+      <Text>Политика конфиденциальности</Text>
+    </ScrollView>
   );
 }
 
@@ -79,12 +92,17 @@ const styles = StyleSheet.create({
     paddingStart: 20,
     paddingEnd: 20,
   },
-  h2: {
-    ...Style.font_bold,
-    fontSize: 20,
+  h2_wrapper: {
     paddingTop: 20,
     paddingBottom: 20,
     paddingStart: 20,
     paddingEnd: 20,
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  h2: {
+    ...Style.font_bold,
+    fontSize: 20,
+    paddingStart: 15,
   },
 });

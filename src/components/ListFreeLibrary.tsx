@@ -2,9 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, View, Text, StyleSheet} from 'react-native';
 import SvgImage from './SvgImage';
 import Style from '../style/Light';
+import Icon from 'react-native-vector-icons/Entypo';
 
 interface IList {
   title: string;
+  desc: string;
+  icon: string;
 }
 
 function ListFreeLibrary() {
@@ -13,43 +16,51 @@ function ListFreeLibrary() {
   useEffect(() => {
     setList([
       {
-        title: 'Материалы',
-      },
-      {
         title: 'Статьи',
+        desc: 'Самые интересные статьи обо всём и всем',
+        icon: 'browser',
       },
       {
-        title: 'Новости',
+        title: 'Нормативы',
+        desc: 'Что говорит нам закон',
+        icon: 'text',
       },
       {
-        title: 'Тесты',
+        title: 'Бух учет',
+        desc: 'Бухгалтерский учет от А до Я',
+        icon: 'newsletter',
       },
       {
-        title: 'Видео',
+        title: 'Памятки',
+        desc: 'Напоминаем, что нужно делать если...',
+        icon: 'open-book',
       },
       {
-        title: 'Чат',
+        title: 'Инструкции',
+        desc: 'Пошагово показываем, что и как делать',
+        icon: 'list',
+      },
+      {
+        title: 'Популярные вопросы',
+        desc: 'Отвечаем на самые главные вопросы',
+        icon: 'help',
       },
     ]);
   }, []);
 
-  const renderItem = ({item}: {item: IList; index: number}) => (
-    <View style={[styles.list_item]}>
-      <View style={[styles.card]}>
-        <SvgImage width="35px" height="35px" name="close" fill={'black'} />
-      </View>
-      <Text style={styles.title}>{item.title}</Text>
-    </View>
-  );
-
   return (
     <View style={styles.container}>
-      <FlatList
-        data={list}
-        renderItem={renderItem}
-        keyExtractor={item => item.title}
-        overScrollMode={'never'}
-      />
+      {list.map(item => (
+        <View style={styles.list_item} key={item.title}>
+          <View style={[styles.card]}>
+            <Icon name={item.icon} color={'black'} size={30} />
+          </View>
+          <View style={styles.content}>
+            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.desc}>{item.desc}</Text>
+          </View>
+        </View>
+      ))}
     </View>
   );
 }
@@ -60,6 +71,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     paddingStart: 20,
+    paddingEnd: 20,
   },
   list_item: {
     // flex: 1,
@@ -76,9 +88,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  content: {width: 0, flexGrow: 1},
   title: {
     ...Style.font,
     fontSize: 20,
     paddingStart: 20,
+  },
+  desc: {
+    ...Style.font,
+    fontSize: 13,
+    paddingStart: 20,
+    paddingBottom: 5,
+    opacity: 0.5,
   },
 });

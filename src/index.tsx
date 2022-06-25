@@ -12,7 +12,7 @@ export default function App() {
       <StatusBar
         animated={true}
         barStyle="dark-content"
-        backgroundColor="transparent"
+        backgroundColor="white"
         translucent={true}
       />
       <Navigate />
