@@ -49,8 +49,8 @@ function HomePage() {
         <Text style={styles.h2}>Подпишись</Text>
       </View>
       <SocialButtons />
-      <Text>Публичная оферта</Text>
-      <Text>Политика конфиденциальности</Text>
+      <Text style={styles.link}>Публичная оферта</Text>
+      <Text style={styles.link}>Политика конфиденциальности</Text>
     </ScrollView>
   );
 }
@@ -104,5 +104,13 @@ const styles = StyleSheet.create({
     ...Style.font_bold,
     fontSize: 20,
     paddingStart: 15,
+  },
+  link: {
+    ...Style.font,
+    fontSize: 13,
+    opacity: 0.5,
+    paddingStart: 20,
+    marginBottom: 10,
+    textDecorationLine: 'underline',
   },
 });

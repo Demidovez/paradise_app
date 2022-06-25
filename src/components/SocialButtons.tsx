@@ -20,22 +20,22 @@ function SocialButtons() {
         link: 'https://financialparadise.by',
         label: 'Наш сайт, financialparadise.by',
         icon: 'link',
-        color: '#81ecec55',
-        colorIcon: '#00cec9',
+        color: '#81ecec33',
+        colorIcon: '#00cec9CC',
       },
       {
         link: 'https://financialparadise.by',
         label: 'Инстаграм, @financial_paradisee',
         icon: 'instagram',
-        color: '#fd79a855',
-        colorIcon: '#e84393',
+        color: '#fd79a833',
+        colorIcon: '#e84393CC',
       },
       {
         link: 'https://financialparadise.by',
         label: 'Чат в телеграм',
         icon: 'telegram',
-        color: '#74b9ff55',
-        colorIcon: '#0984e3',
+        color: '#74b9ff33',
+        colorIcon: '#0984e3CC',
       },
     ];
 
