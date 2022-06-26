@@ -9,7 +9,10 @@ interface IDataState {
 const initialState: IDataState = {
   articles: [],
   theme: {
-    colors: [],
+    colors: {
+      selected: '#000000',
+      unselected: '#AEAEAE',
+    },
   },
 };
 

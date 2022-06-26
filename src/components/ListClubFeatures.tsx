@@ -69,6 +69,7 @@ function ListClubFeatures() {
         data={list}
         horizontal
         renderItem={renderItem}
+        showsHorizontalScrollIndicator={false}
         keyExtractor={item => item.title}
         overScrollMode={'never'}
       />

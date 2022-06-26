@@ -2,7 +2,6 @@ import React, {useMemo} from 'react';
 import {SvgProps} from 'react-native-svg';
 
 import SvgNotFound from '../../assets/icons/not_found.svg';
-import SvgCloseShape from '../../assets/icons/close.svg';
 import {useAppSelector} from '../hooks';
 import {Selectors} from '../redux/selectors/selectors';
 import {StyleProp, ViewStyle} from 'react-native';
@@ -16,7 +15,7 @@ interface ISvgImage {
 }
 
 const SvgList = {
-  close: SvgCloseShape,
+  notFound: SvgNotFound,
 };
 
 function SvgImage({name, fill, ...props}: ISvgImage) {

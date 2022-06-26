@@ -37,7 +37,6 @@ function HomePage() {
         <Emoji name="gift" style={{fontSize: 25}} />
         <Text style={styles.h2}>Бесплатно</Text>
       </View>
-
       <ListFreeLibrary />
       <View style={styles.h2_wrapper}>
         <Emoji name="trophy" style={{fontSize: 25}} />

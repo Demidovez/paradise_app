@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {useAppSelector} from '../hooks';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {View, StyleSheet} from 'react-native';
@@ -7,13 +7,10 @@ import HomePage from '../pages/Home';
 import UserPage from '../pages/User';
 import EventsPage from '../pages/Events';
 import LibraryPage from '../pages/Library';
-import SvgHome from '../../assets/icons/templates.svg';
-import SvgEvents from '../../assets/icons/projects.svg';
-import SvgUser from '../../assets/icons/settings.svg';
-import SvgLibrary from '../../assets/icons/settings.svg';
 import {Routes} from './routes';
 import {Selectors} from '../redux/selectors/selectors';
 import {useMemo} from 'react';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 export type TTabsStackParamList = {
   [Routes.Home]: undefined;
@@ -32,8 +29,8 @@ export default function Tabs() {
 
   const theme = useAppSelector(Selectors.getTheme);
 
-  const screenOptions = useMemo(
-    () => ({
+  const screenOptions = useCallback(
+    ({route}: any) => ({
       headerStyle: {
         backgroundColor: theme.colors.headerBar,
         elevation: 0,
@@ -48,8 +45,30 @@ export default function Tabs() {
         marginLeft: 24,
       },
       tabBarActiveTintColor: theme.colors.selected,
-      tabBarInactiveTintColor: theme.colors.unSelected,
+      tabBarInactiveTintColor: theme.colors.unselected,
       headerShadowVisible: false,
+      tabBarIcon: ({color}: any) => {
+        let iconName;
+
+        switch (route.name) {
+          case Routes.Home:
+            iconName = 'home';
+            break;
+          case Routes.Events:
+            iconName = 'bell';
+            break;
+          case Routes.User:
+            iconName = 'user';
+            break;
+          case Routes.Library:
+            iconName = 'book-open';
+            break;
+          default:
+            iconName = 'home';
+        }
+
+        return <Icon name={iconName} color={color} size={25} />;
+      },
       tabBarLabel: () => null,
       tabBarStyle: [
         {
@@ -62,69 +81,37 @@ export default function Tabs() {
     [theme],
   );
 
-  const optionsHome = useMemo(
-    () => ({
-      title: 'Главная',
-      headerShown: false,
-      tabBarIcon: ({color, size}: any) => (
-        <SvgHome width={size} height={size} fill={color} />
-      ),
-    }),
-    [],
-  );
-
-  const optionsEvents = useMemo(
-    () => ({
-      title: 'События',
-      tabBarIcon: ({color, size}: any) => (
-        <SvgEvents width={size} height={size} fill={color} />
-      ),
-    }),
-    [],
-  );
-
-  const optionsUser = useMemo(
-    () => ({
-      title: 'Пользователь',
-      tabBarIcon: ({color, size}: any) => (
-        <SvgUser width={size} height={size} fill={color} />
-      ),
-    }),
-    [],
-  );
-
-  const optionsLibrary = useMemo(
-    () => ({
-      title: 'Материалы',
-      tabBarIcon: ({color, size}: any) => (
-        <SvgLibrary width={size} height={size} fill={color} />
-      ),
-    }),
-    [],
-  );
-
   return (
     <View style={styles.container}>
       <TabsStack.Navigator screenOptions={screenOptions}>
         <TabsStack.Screen
           name={Routes.Home}
           component={HomePage}
-          options={optionsHome}
+          options={{
+            headerShown: false,
+          }}
         />
         <TabsStack.Screen
           name={Routes.Events}
           component={EventsPage}
-          options={optionsEvents}
+          options={{
+            title: 'События',
+          }}
         />
         <TabsStack.Screen
           name={Routes.User}
           component={UserPage}
-          options={optionsUser}
+          options={{
+            title: 'Пользователь',
+            headerShown: false,
+          }}
         />
         <TabsStack.Screen
           name={Routes.Library}
           component={LibraryPage}
-          options={optionsLibrary}
+          options={{
+            title: 'Материалы',
+          }}
         />
       </TabsStack.Navigator>
     </View>
