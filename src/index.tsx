@@ -3,9 +3,7 @@ import {StyleSheet, SafeAreaView, StatusBar} from 'react-native';
 import Navigate from './navigation/mainNavigator';
 import ToastContainer from './components/ToastContainer';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
-import moment from 'moment';
-
-moment.locale('ru-RU');
+import 'moment/locale/ru';
 
 export default function App() {
   useEffect(() => {
@@ -17,7 +15,7 @@ export default function App() {
       <StatusBar
         animated={true}
         barStyle="dark-content"
-        backgroundColor="white"
+        backgroundColor="#f2f3f5DD"
         translucent={true}
       />
       <Navigate />

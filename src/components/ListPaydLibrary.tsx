@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, View, Text, StyleSheet} from 'react-native';
-import SvgImage from './SvgImage';
+import {View, Text, StyleSheet} from 'react-native';
 import Style from '../style/Light';
-import Icon from 'react-native-vector-icons/Entypo';
+import Emoji from 'react-native-emoji';
 
 interface IList {
   title: string;
@@ -18,32 +17,32 @@ function ListPaydLibrary() {
       {
         title: 'ТОП 20 Инструментов',
         desc: 'Как упростить работу бухгалтера',
-        icon: 'tools',
+        icon: 'hammer_and_wrench',
       },
       {
         title: 'Курс Бухгалтер 2022',
         desc: '30 дней структурированной информации',
-        icon: 'trophy',
+        icon: 'crown',
       },
       {
         title: 'Инсайды на 2023 год!',
         desc: 'Что нужно знать уже сейчас',
-        icon: 'suitcase',
+        icon: 'newspaper',
       },
       {
         title: 'Как искать клиентов?',
         desc: 'Расскажем и покажем способы, которые Вам помогут найти новых клиентов',
-        icon: 'add-user',
+        icon: 'man-boy-boy',
       },
       {
         title: 'Бух. лайфхаки',
         desc: 'Какие хитрости упростят Вам работу',
-        icon: 'rocket',
+        icon: 'brain',
       },
       {
         title: 'Увеличиваем доход',
         desc: 'Обсудим шаги, которые Вы даже не знали',
-        icon: 'wallet',
+        icon: 'moneybag',
       },
     ]);
   }, []);
@@ -53,7 +52,7 @@ function ListPaydLibrary() {
       {list.map(item => (
         <View style={styles.list_item} key={item.title}>
           <View style={[styles.card]}>
-            <Icon name={item.icon} color={'black'} size={30} />
+            <Emoji name={item.icon} style={{fontSize: 20}} />
           </View>
           <View style={styles.content}>
             <Text style={styles.title}>{item.title}</Text>
@@ -75,18 +74,22 @@ const styles = StyleSheet.create({
   },
   list_item: {
     // flex: 1,
-    paddingEnd: 24,
+    padding: 14,
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 20,
+    backgroundColor: 'white',
+    borderRadius: 15,
+    elevation: 20,
+    shadowColor: '#D4D4D4',
   },
   card: {
-    minWidth: 80,
-    minHeight: 80,
-    borderRadius: 20,
-    backgroundColor: '#edededAA',
+    minWidth: 60,
+    minHeight: 60,
+    borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#edededAA',
   },
   content: {width: 0, flexGrow: 1},
   title: {

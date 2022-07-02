@@ -81,7 +81,14 @@ export default ListClubFeatures;
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 10,
+    marginStart: 20,
+    marginEnd: 20,
+    paddingTop: 20,
+    paddingBottom: 20,
+    backgroundColor: 'white',
+    borderRadius: 15,
+    elevation: 20,
+    shadowColor: '#D4D4D4',
   },
   list_item: {
     paddingEnd: 24,

@@ -1,17 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, Text, StatusBar, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import UserContentTabs from '../components/UserContentTabs';
 import Style from '../style/Light';
+import Emoji from 'react-native-emoji';
 
-function LibraryPage() {
+function User() {
+  const [avatarColor] = useState('#D95DE944');
+
+  const [fullname] = useState('Демидовец Николай Михайлович');
+
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.account}>
-        <View style={styles.user}>
-          <Icon name={'user-o'} color={'black'} size={60} />
+        <View style={[styles.user, {backgroundColor: avatarColor}]}>
+          <Text style={styles.name_avatar}>
+            {fullname
+              .split(' ')
+              .map(part => part[0])
+              .slice(0, 2)}
+          </Text>
         </View>
         <View style={styles.profile}>
-          <Text style={styles.name}>Демидовец Николай Михайлович</Text>
+          <Text style={styles.name}>{fullname}</Text>
           <Text style={styles.email}>nikolaydemidovez@gmail.com</Text>
           <Text style={styles.status}>Членство оформлено</Text>
 
@@ -38,27 +49,24 @@ function LibraryPage() {
         </View>
       </View>
       <View style={styles.subscribe}>
-        <Icon
-          name={'trophy'}
-          color={'#1FBE91'}
-          size={30}
-          style={styles.control}
-        />
+        <Emoji name="trophy" style={{fontSize: 25}} />
         <Text style={styles.label_subscribe}>Членство в клубе</Text>
       </View>
-    </ScrollView>
+      <UserContentTabs />
+    </View>
   );
 }
 
-export default React.memo(LibraryPage);
+export default React.memo(User);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
+    backgroundColor: '#f2f3f5DD',
   },
   account: {
-    flex: 1,
+    marginTop: 10,
     marginStart: 20,
     marginEnd: 20,
     marginBottom: 10,
@@ -66,7 +74,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'gray',
   },
   user: {
-    backgroundColor: '#E9E9E9',
+    backgroundColor: '#FFFFFF',
     padding: 20,
     width: 120,
     height: 120,
@@ -74,6 +82,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginEnd: 20,
+  },
+  name_avatar: {
+    ...Style.font_bold,
+    fontSize: 40,
+    color: 'white',
   },
   profile: {width: 0, flexGrow: 1},
   name: {
@@ -102,14 +115,17 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#55efc444',
+    backgroundColor: 'white',
     marginStart: 20,
     marginEnd: 20,
     borderRadius: 20,
+    padding: 10,
+    elevation: 20,
+    shadowColor: '#D4D4D4',
   },
   label_subscribe: {
     ...Style.font_bold,
     fontSize: 20,
-    color: '#1FBE91',
+    paddingStart: 10,
   },
 });
