@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react';
 import {useAppSelector} from '../hooks';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, StatusBar} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import HomePage from '../pages/Home';
 import UserPage from '../pages/User';
@@ -9,7 +9,6 @@ import EventsPage from '../pages/Events';
 import LibraryPage from '../pages/Library';
 import {Routes} from './routes';
 import {Selectors} from '../redux/selectors/selectors';
-import {useMemo} from 'react';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 export type TTabsStackParamList = {
@@ -81,9 +80,31 @@ export default function Tabs() {
     [theme],
   );
 
+  const screenListeners = useCallback(
+    ({navigation, route}) => ({
+      state: (e: any) => {
+        switch (route.name) {
+          case Routes.Home:
+          case Routes.Events:
+          case Routes.User:
+            StatusBar.setBackgroundColor('#f2f3f5DD');
+            break;
+          case Routes.Library:
+            StatusBar.setBackgroundColor('#FFFFFF');
+            break;
+          default:
+            StatusBar.setBackgroundColor('#FFFFFF');
+        }
+      },
+    }),
+    [],
+  );
+
   return (
     <View style={styles.container}>
-      <TabsStack.Navigator screenOptions={screenOptions}>
+      <TabsStack.Navigator
+        screenOptions={screenOptions}
+        screenListeners={screenListeners}>
         <TabsStack.Screen
           name={Routes.Home}
           component={HomePage}
@@ -95,14 +116,13 @@ export default function Tabs() {
           name={Routes.Events}
           component={EventsPage}
           options={{
-            title: 'События',
+            headerShown: false,
           }}
         />
         <TabsStack.Screen
           name={Routes.User}
           component={UserPage}
           options={{
-            title: 'Пользователь',
             headerShown: false,
           }}
         />
@@ -110,7 +130,7 @@ export default function Tabs() {
           name={Routes.Library}
           component={LibraryPage}
           options={{
-            title: 'Материалы',
+            headerShown: false,
           }}
         />
       </TabsStack.Navigator>

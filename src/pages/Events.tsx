@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet, View, Text, StatusBar} from 'react-native';
 
 function EventsPage() {
   return (

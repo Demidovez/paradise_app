@@ -5,9 +5,7 @@ import {
   Text,
   Image,
   StatusBar,
-  Dimensions,
   ScrollView,
-  Button,
 } from 'react-native';
 import ListClubFeatures from '../components/ListClubFeatures';
 import ListFreeLibrary from '../components/ListFreeLibrary';

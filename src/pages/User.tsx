@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text, StatusBar, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import UserContentTabs from '../components/UserContentTabs';
@@ -62,7 +62,7 @@ export default React.memo(User);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    paddingTop: StatusBar.currentHeight || 0,
     backgroundColor: '#f2f3f5DD',
   },
   account: {
