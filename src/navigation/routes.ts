@@ -1,11 +1,12 @@
 export enum Routes {
   Tabs = 'Tabs',
-  Anothers = 'Anothers',
+  Library = 'Library',
   Modals = 'Modals',
   Home = 'Home',
   Events = 'Events',
   User = 'Settings',
-  Library = 'Library',
-  TestFullPage = 'TestFullPage',
+  LibraryHome = 'LibraryHome',
+  MaterialCategory = 'MaterialCategory',
+  MaterialPage = 'MaterialPage',
   ModalPicker = 'ModalPicker',
 }

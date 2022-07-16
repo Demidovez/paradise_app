@@ -12,9 +12,15 @@ export interface IComment {
   text: string;
 }
 
-export interface IFavorite {
+export interface IMaterialCategory {
+  title: string;
+  icon: string;
+  color: string;
+}
+
+export interface IMaterial {
   id: number;
-  article: string;
+  title: string;
   date: Date;
   desc: string;
   comments: number;

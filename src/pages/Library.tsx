@@ -1,83 +1,96 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text, StatusBar, ScrollView} from 'react-native';
-import SearchMaterials from '../components/SearchMaterials';
-import Style from '../style/Light';
-
-interface IMaterial {
-  title: string;
-  icon: string;
-  color: string;
-}
+import React, {useEffect, useState} from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import SearchMaterials from "../components/SearchMaterials";
+import {Routes} from "../navigation/routes";
+import Style from "../style/Light";
+import * as RootNavigation from "../navigation/rootNavigation";
+import {IMaterialCategory} from "../types/types";
 
 function LibraryPage() {
-  const [materials, setMaterials] = useState<IMaterial[]>([]);
+  const [categories, setCategories] = useState<IMaterialCategory[]>([]);
 
   useEffect(() => {
-    setMaterials([
+    setCategories([
       {
-        title: 'Материалы',
-        icon: '🚀',
-        color: '#eefcef',
+        title: "Статьи",
+        icon: "📑",
+        color: "#e6f5f9",
       },
       {
-        title: 'Статьи',
-        icon: '📑',
-        color: '#e6f5f9',
+        title: "Новости",
+        icon: "📰",
+        color: "#f4f5f9",
       },
       {
-        title: 'Новости',
-        icon: '📰',
-        color: '#f4f5f9',
+        title: "Уроки",
+        icon: "📕",
+        color: "#f1e7ff",
       },
       {
-        title: 'Уроки',
-        icon: '📕',
-        color: '#f1e7ff',
+        title: "Тесты",
+        icon: "💻",
+        color: "#ffeee1",
       },
       {
-        title: 'Тесты',
-        icon: '💻',
-        color: '#ffeee1',
+        title: "Видео",
+        icon: "🎥",
+        color: "#f9f8f2",
       },
       {
-        title: 'Видео',
-        icon: '🎥',
-        color: '#f9f8f2',
+        title: "Опросы",
+        icon: "📣",
+        color: "#F4FFD2",
       },
       {
-        title: 'Опросы',
-        icon: '📣',
-        color: '#F4FFD2',
+        title: "Курсы",
+        icon: "🎓",
+        color: "#FFCFD7",
       },
       {
-        title: 'Курсы',
-        icon: '🎓',
-        color: '#FFCFD7',
+        title: "Калькуляторы",
+        icon: "🧮",
+        color: "#FFF3D0",
       },
       {
-        title: 'Калькуляторы',
-        icon: '🧮',
-        color: '#FFF3D0',
+        title: "Прочее",
+        icon: "🚀",
+        color: "#eefcef",
       },
     ]);
   }, []);
+
+  const goToCategory = (category: IMaterialCategory) => {
+    RootNavigation.navigate(Routes.Library, {
+      screen: Routes.MaterialCategory,
+      params: {category},
+    });
+  };
 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.h1}>Материалы клуба</Text>
       <SearchMaterials />
       <View style={styles.materials}>
-        {materials.map(material => (
-          <View key={material.title} style={styles.material_card}>
+        {categories.map(category => (
+          <TouchableOpacity
+            key={category.title}
+            style={styles.material_card}
+            onPress={() => goToCategory(category)}>
             <View
               style={[
                 styles.background_card,
-                {backgroundColor: material.color},
+                {backgroundColor: category.color},
               ]}>
-              <Text style={styles.icon}>{material.icon}</Text>
+              <Text style={styles.icon}>{category.icon}</Text>
             </View>
-            <Text style={styles.title}>{material.title}</Text>
-          </View>
+            <Text style={styles.title}>{category.title}</Text>
+          </TouchableOpacity>
         ))}
       </View>
     </ScrollView>
@@ -89,8 +102,7 @@ export default React.memo(LibraryPage);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
-    marginTop: StatusBar.currentHeight || 0,
+    backgroundColor: "#ffffff",
     padding: 20,
     paddingTop: 0,
   },
@@ -101,21 +113,21 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   materials: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignContent: 'stretch',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignContent: "stretch",
     marginStart: -10,
     marginEnd: -10,
     marginTop: 10,
   },
   material_card: {
     marginTop: 20,
-    width: '33.3%',
+    width: "33.3%",
   },
   background_card: {
     height: 150,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginStart: 10,
     marginEnd: 10,
     borderRadius: 15,
@@ -124,10 +136,10 @@ const styles = StyleSheet.create({
     ...Style.font_bold,
     fontSize: 14,
     paddingTop: 5,
-    textAlign: 'center',
+    textAlign: "center",
   },
   icon: {
     fontSize: 30,
-    color: '#000000',
+    color: "#000000",
   },
 });

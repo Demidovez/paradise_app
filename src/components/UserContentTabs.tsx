@@ -3,15 +3,15 @@ import {StyleSheet, View, Text, StatusBar, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Style from '../style/Light';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {IComment, IFavorite} from '../types/types';
+import {IComment, IMaterial} from '../types/types';
 import CommentHistory from './CommentHistory';
-import FavoriteHistory from './FavoriteHistory';
+import MaterialCard from './MaterialCard';
 
 const Tab = createMaterialTopTabNavigator();
 
 function UserContentTabs() {
   const [comments, setComments] = useState<IComment[]>([]);
-  const [favorites, setFavorites] = useState<IFavorite[]>([]);
+  const [favorites, setFavorites] = useState<IMaterial[]>([]);
 
   useEffect(() => {
     const comments: IComment[] = [
@@ -49,10 +49,10 @@ function UserContentTabs() {
 
     setComments(comments);
 
-    const favorites: IFavorite[] = [
+    const favorites: IMaterial[] = [
       {
         id: 0,
-        article: 'Советы начинающему бухгалтеру',
+        title: 'Советы начинающему бухгалтеру',
         date: new Date(),
         desc: 'Рассказываем самые лучшие советы бухгалтеру, вступившему на тернистый путь бехгалтерии',
         comments: 120,
@@ -60,7 +60,7 @@ function UserContentTabs() {
       },
       {
         id: 1,
-        article: 'Как искать клиентов?',
+        title: 'Как искать клиентов?',
         date: new Date('07/03/2022'),
         desc: 'Что, где, когда искать новых клиентов? Почему один новый лучше двух старых? На каких площадках следует искать?',
         comments: 10,
@@ -68,7 +68,7 @@ function UserContentTabs() {
       },
       {
         id: 2,
-        article: 'Топ 10 инструметов',
+        title: 'Топ 10 инструметов',
         date: new Date('12/14/2022'),
         desc: 'Знали ли Вы хотябы 5 лучших инструментов? А мы знаем! И Вам расскажем!',
         comments: 89,
@@ -76,7 +76,7 @@ function UserContentTabs() {
       },
       {
         id: 3,
-        article: 'Инсайды на 2023 год!',
+        title: 'Инсайды на 2023 год!',
         date: new Date('01/02/2022'),
         desc: 'Новости из мира бухгалтерии. На что следует акцентировать внимание, а на что нужно забить.',
         comments: 56,
@@ -84,7 +84,7 @@ function UserContentTabs() {
       },
       {
         id: 4,
-        article: 'Курс Бухгалтер 2022',
+        title: 'Курс Бухгалтер 2022',
         date: new Date('10/19/2022'),
         desc: 'Наш новый курс с новыми идеями, секретами и методикам. Ждем Вас здесь и сейчас!',
         comments: 23,
@@ -109,7 +109,7 @@ function UserContentTabs() {
     return (
       <ScrollView contentContainerStyle={styles.tab_content}>
         {favorites.map(favorite => (
-          <FavoriteHistory favorite={favorite} key={favorite.id} />
+          <MaterialCard material={favorite} key={favorite.id} />
         ))}
       </ScrollView>
     );

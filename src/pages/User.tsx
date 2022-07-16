@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text, StatusBar, ScrollView} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import UserContentTabs from '../components/UserContentTabs';
-import Style from '../style/Light';
-import Emoji from 'react-native-emoji';
+import React, {useState} from "react";
+import {StyleSheet, View, Text} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
+import UserContentTabs from "../components/UserContentTabs";
+import Style from "../style/Light";
+import Emoji from "react-native-emoji";
 
 function User() {
-  const [avatarColor] = useState('#D95DE944');
+  const [avatarColor] = useState("#D95DE944");
 
-  const [fullname] = useState('Демидовец Николай Михайлович');
+  const [fullname] = useState("Демидовец Николай Михайлович");
 
   return (
     <View style={styles.container}>
@@ -16,7 +16,7 @@ function User() {
         <View style={[styles.user, {backgroundColor: avatarColor}]}>
           <Text style={styles.name_avatar}>
             {fullname
-              .split(' ')
+              .split(" ")
               .map(part => part[0])
               .slice(0, 2)}
           </Text>
@@ -28,20 +28,20 @@ function User() {
 
           <View style={styles.controls}>
             <Icon
-              name={'edit'}
-              color={'black'}
+              name={"edit"}
+              color={"black"}
               size={30}
               style={styles.control}
             />
             <Icon
-              name={'gear'}
-              color={'black'}
+              name={"gear"}
+              color={"black"}
               size={30}
               style={styles.control}
             />
             <Icon
-              name={'sign-out'}
-              color={'black'}
+              name={"sign-out"}
+              color={"black"}
               size={30}
               style={styles.control}
             />
@@ -62,31 +62,30 @@ export default React.memo(User);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight || 0,
-    backgroundColor: '#f2f3f5DD',
+    backgroundColor: "#f2f3f5DD",
   },
   account: {
     marginTop: 10,
     marginStart: 20,
     marginEnd: 20,
     marginBottom: 10,
-    flexDirection: 'row',
+    flexDirection: "row",
     // backgroundColor: 'gray',
   },
   user: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     padding: 20,
     width: 120,
     height: 120,
     borderRadius: 300,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginEnd: 20,
   },
   name_avatar: {
     ...Style.font_bold,
     fontSize: 40,
-    color: 'white',
+    color: "white",
   },
   profile: {width: 0, flexGrow: 1},
   name: {
@@ -104,24 +103,24 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 5,
     opacity: 1,
-    color: '#1FBE91',
+    color: "#1FBE91",
   },
-  controls: {flexDirection: 'row', marginStart: -15},
+  controls: {flexDirection: "row", marginStart: -15},
   control: {
     padding: 15,
   },
   subscribe: {
-    flexDirection: 'row',
-    alignContent: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
+    flexDirection: "row",
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
     marginStart: 20,
     marginEnd: 20,
     borderRadius: 20,
     padding: 10,
     elevation: 20,
-    shadowColor: '#D4D4D4',
+    shadowColor: "#D4D4D4",
   },
   label_subscribe: {
     ...Style.font_bold,

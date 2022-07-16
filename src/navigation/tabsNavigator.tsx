@@ -1,15 +1,15 @@
-import React, {useCallback} from 'react';
-import {useAppSelector} from '../hooks';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {View, StyleSheet, StatusBar} from 'react-native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import HomePage from '../pages/Home';
-import UserPage from '../pages/User';
-import EventsPage from '../pages/Events';
-import LibraryPage from '../pages/Library';
-import {Routes} from './routes';
-import {Selectors} from '../redux/selectors/selectors';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import React, {useCallback} from "react";
+import {useAppSelector} from "../hooks";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {View, StyleSheet, StatusBar} from "react-native";
+import {NativeStackScreenProps} from "@react-navigation/native-stack";
+import HomePage from "../pages/Home";
+import UserPage from "../pages/User";
+import EventsPage from "../pages/Events";
+import {Routes} from "./routes";
+import {Selectors} from "../redux/selectors/selectors";
+import Icon from "react-native-vector-icons/SimpleLineIcons";
+import LibraryNavigator from "./libraryNavigator";
 
 export type TTabsStackParamList = {
   [Routes.Home]: undefined;
@@ -38,7 +38,7 @@ export default function Tabs() {
       },
       headerTintColor: theme.colors.primary,
       headerTitleStyle: {
-        fontFamily: 'Nunito-Bold',
+        fontFamily: "Nunito-Bold",
       },
       headerTitleContainerStyle: {
         marginLeft: 24,
@@ -51,19 +51,19 @@ export default function Tabs() {
 
         switch (route.name) {
           case Routes.Home:
-            iconName = 'home';
+            iconName = "home";
             break;
           case Routes.Events:
-            iconName = 'bell';
+            iconName = "bell";
             break;
           case Routes.User:
-            iconName = 'user';
+            iconName = "user";
             break;
           case Routes.Library:
-            iconName = 'book-open';
+            iconName = "book-open";
             break;
           default:
-            iconName = 'home';
+            iconName = "home";
         }
 
         return <Icon name={iconName} color={color} size={25} />;
@@ -85,15 +85,12 @@ export default function Tabs() {
       state: (e: any) => {
         switch (route.name) {
           case Routes.Home:
-          case Routes.Events:
           case Routes.User:
-            StatusBar.setBackgroundColor('#f2f3f5DD');
+            StatusBar.setBackgroundColor("#f2f3f5DD");
             break;
-          case Routes.Library:
-            StatusBar.setBackgroundColor('#FFFFFF');
+          case Routes.Events:
+            StatusBar.setBackgroundColor("#FFFFFF");
             break;
-          default:
-            StatusBar.setBackgroundColor('#FFFFFF');
         }
       },
     }),
@@ -128,7 +125,7 @@ export default function Tabs() {
         />
         <TabsStack.Screen
           name={Routes.Library}
-          component={LibraryPage}
+          component={LibraryNavigator}
           options={{
             headerShown: false,
           }}
@@ -141,6 +138,6 @@ export default function Tabs() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
   },
 });

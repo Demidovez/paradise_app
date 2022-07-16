@@ -1,19 +1,12 @@
-import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  StatusBar,
-  ScrollView,
-} from 'react-native';
-import ListClubFeatures from '../components/ListClubFeatures';
-import ListFreeLibrary from '../components/ListFreeLibrary';
-import ListPaydLibrary from '../components/ListPaydLibrary';
-import Style from '../style/Light';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import Emoji from 'react-native-emoji';
-import SocialButtons from '../components/SocialButtons';
+import React from "react";
+import {StyleSheet, View, Text, Image, ScrollView} from "react-native";
+import ListClubFeatures from "../components/ListClubFeatures";
+import ListFreeLibrary from "../components/ListFreeLibrary";
+import ListPaydLibrary from "../components/ListPaydLibrary";
+import Style from "../style/Light";
+import Icon from "react-native-vector-icons/SimpleLineIcons";
+import Emoji from "react-native-emoji";
+import SocialButtons from "../components/SocialButtons";
 
 function HomePage() {
   return (
@@ -24,7 +17,7 @@ function HomePage() {
       </View>
       <View style={styles.logoWrapper}>
         <Image
-          source={require('../../assets/images/logo.png')}
+          source={require("../../assets/images/logo.png")}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -57,13 +50,12 @@ export default React.memo(HomePage);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f3f5DD',
+    backgroundColor: "#f2f3f5DD",
   },
   settings: {
-    position: 'absolute',
-    flexDirection: 'row',
-    alignSelf: 'flex-end',
-    marginTop: StatusBar.currentHeight || 0,
+    position: "absolute",
+    flexDirection: "row",
+    alignSelf: "flex-end",
     paddingEnd: 10,
   },
   icon: {
@@ -71,14 +63,14 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   logoWrapper: {
-    alignContent: 'center',
-    alignItems: 'center',
+    alignContent: "center",
+    alignItems: "center",
     paddingBottom: 60,
     paddingTop: 80,
   },
   logo: {
-    width: '70%',
-    resizeMode: 'contain',
+    width: "70%",
+    resizeMode: "contain",
     height: undefined,
     aspectRatio: 2.3,
   },
@@ -94,8 +86,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     paddingStart: 20,
     paddingEnd: 20,
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    flexDirection: "row",
   },
   h2: {
     ...Style.font_bold,
@@ -108,6 +100,6 @@ const styles = StyleSheet.create({
     opacity: 0.5,
     paddingStart: 20,
     marginBottom: 10,
-    textDecorationLine: 'underline',
+    textDecorationLine: "underline",
   },
 });

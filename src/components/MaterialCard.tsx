@@ -2,32 +2,44 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Style from '../style/Light';
-import {IFavorite} from '../types/types';
+import {IMaterial} from '../types/types';
 import moment from 'moment';
+import * as RootNavigation from '../navigation/rootNavigation';
+import {Routes} from '../navigation/routes';
 
 interface IProps {
-  favorite: IFavorite;
+  material: IMaterial;
 }
 
-function FavoriteHistory({favorite}: IProps) {
+function MaterialCard({material}: IProps) {
   const [isFavorite, setIsFavorite] = useState(true);
 
-  const [commentsCount] = useState(favorite.comments);
-  const [favoritesCount, setFavoritesCount] = useState(favorite.favorites);
+  const [commentsCount] = useState(material.comments);
+  const [favoritesCount, setFavoritesCount] = useState(material.favorites);
 
   const onSetFavorite = () => {
     setIsFavorite(!isFavorite);
     setFavoritesCount(isFavorite ? favoritesCount - 1 : favoritesCount + 1);
   };
 
+  const goToCategory = () => {
+    RootNavigation.navigate(Routes.Library, {
+      screen: Routes.MaterialPage,
+      params: {id: material.id},
+    });
+  };
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={goToCategory}
+      activeOpacity={0.6}>
       <View style={styles.wrapper}>
-        <Text style={styles.article}>{favorite.article}</Text>
-        <Text style={styles.date}>{moment(favorite.date).format('LL')}</Text>
+        <Text style={styles.article}>{material.title}</Text>
+        <Text style={styles.date}>{moment(material.date).format('LL')}</Text>
         <View style={styles.separator} />
         <View style={styles.content}>
-          <Text style={styles.text}>{favorite.desc}...</Text>
+          <Text style={styles.text}>{material.desc}...</Text>
         </View>
       </View>
       <View style={styles.icons}>
@@ -44,18 +56,16 @@ function FavoriteHistory({favorite}: IProps) {
           )}
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
-export default React.memo(FavoriteHistory);
+export default React.memo(MaterialCard);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     borderRadius: 15,
-
-    marginBottom: 20,
     backgroundColor: 'white',
     elevation: 20,
     shadowColor: '#D4D4D4',
@@ -67,6 +77,7 @@ const styles = StyleSheet.create({
   article: {
     ...Style.font_bold,
     opacity: 0.8,
+    fontSize: 16,
   },
   date: {
     ...Style.font,
