@@ -1,10 +1,10 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {StyleSheet, View, Text, StatusBar, ScrollView} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import Style from '../style/Light';
-import {IComment} from '../types/types';
-import moment from 'moment';
-import Emoji from 'react-native-emoji';
+import React, {useCallback, useEffect, useState} from "react";
+import {StyleSheet, View, Text, StatusBar, ScrollView} from "react-native";
+import Icon from "react-native-vector-icons/Feather";
+import Style from "../style/Light";
+import {IComment} from "../types/types";
+import moment from "moment";
+import Emoji from "react-native-emoji";
 
 interface IProps {
   comment: IComment;
@@ -14,7 +14,7 @@ function CommentHistory({comment}: IProps) {
   return (
     <View style={styles.container}>
       <Text style={styles.article}>{comment.article}</Text>
-      <Text style={styles.date}>{moment(comment.date).format('LL')}</Text>
+      <Text style={styles.date}>{moment(comment.date).format("LL")}</Text>
       <View style={styles.content}>
         <View>
           <Icon name="chevrons-left" size={20} color="#00000044" />
@@ -35,10 +35,9 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 15,
     padding: 15,
-    marginBottom: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     elevation: 20,
-    shadowColor: '#D4D4D4',
+    shadowColor: "#D4D4D4",
   },
   article: {
     ...Style.font_bold,
@@ -47,10 +46,10 @@ const styles = StyleSheet.create({
   date: {
     ...Style.font,
     fontSize: 12,
-    color: 'gray',
+    color: "gray",
   },
   content: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingTop: 10,
   },
   text: {
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
     paddingEnd: 5,
   },
   quote_end: {
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
+    flexDirection: "column",
+    justifyContent: "flex-end",
   },
 });

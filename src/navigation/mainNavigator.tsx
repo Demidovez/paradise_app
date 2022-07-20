@@ -6,7 +6,6 @@ import {
 } from "@react-navigation/native-stack";
 import {Routes} from "./routes";
 import Tabs from "./tabsNavigator";
-import Library from "./libraryNavigator";
 import Modals from "./modalsNavigator";
 import {navigationRef} from "./rootNavigation";
 import {useMemo} from "react";
@@ -52,7 +51,6 @@ export default function Navigate() {
     <NavigationContainer ref={navigationRef} theme={theme}>
       <MainStack.Navigator screenOptions={optionsNavigator}>
         <MainStack.Screen name={Routes.Tabs} component={Tabs} />
-        <MainStack.Screen name={Routes.Library} component={Library} />
         <MainStack.Group screenOptions={optionsModals}>
           <MainStack.Screen name={Routes.Modals} component={Modals} />
         </MainStack.Group>

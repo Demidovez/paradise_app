@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
 import {useAppSelector} from "../hooks";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {View, StyleSheet, StatusBar} from "react-native";
+import {View, StyleSheet} from "react-native";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import HomePage from "../pages/Home";
 import UserPage from "../pages/User";
@@ -80,28 +80,9 @@ export default function Tabs() {
     [theme],
   );
 
-  const screenListeners = useCallback(
-    ({navigation, route}) => ({
-      state: (e: any) => {
-        switch (route.name) {
-          case Routes.Home:
-          case Routes.User:
-            StatusBar.setBackgroundColor("#f2f3f5DD");
-            break;
-          case Routes.Events:
-            StatusBar.setBackgroundColor("#FFFFFF");
-            break;
-        }
-      },
-    }),
-    [],
-  );
-
   return (
     <View style={styles.container}>
-      <TabsStack.Navigator
-        screenOptions={screenOptions}
-        screenListeners={screenListeners}>
+      <TabsStack.Navigator screenOptions={screenOptions}>
         <TabsStack.Screen
           name={Routes.Home}
           component={HomePage}

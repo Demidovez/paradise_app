@@ -1,5 +1,12 @@
 import React from "react";
-import {StyleSheet, View, Text, Image, ScrollView} from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  ScrollView,
+  StatusBar,
+} from "react-native";
 import ListClubFeatures from "../components/ListClubFeatures";
 import ListFreeLibrary from "../components/ListFreeLibrary";
 import ListPaydLibrary from "../components/ListPaydLibrary";
@@ -10,38 +17,40 @@ import SocialButtons from "../components/SocialButtons";
 
 function HomePage() {
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.settings}>
-        <Icon name="bell" color="#505050" size={30} style={styles.icon} />
-        <Icon name="settings" color="#505050" size={30} style={styles.icon} />
-      </View>
-      <View style={styles.logoWrapper}>
-        <Image
-          source={require("../../assets/images/logo.png")}
-          style={styles.logo}
-          resizeMode="contain"
-        />
-      </View>
-      <Text style={styles.h1}>Клуб Финансового Рая</Text>
-      <ListClubFeatures />
-      <View style={styles.h2_wrapper}>
-        <Emoji name="gift" style={{fontSize: 25}} />
-        <Text style={styles.h2}>Бесплатно</Text>
-      </View>
-      <ListFreeLibrary />
-      <View style={styles.h2_wrapper}>
-        <Emoji name="trophy" style={{fontSize: 25}} />
-        <Text style={styles.h2}>По подписке</Text>
-      </View>
-      <ListPaydLibrary />
-      <View style={styles.h2_wrapper}>
-        <Emoji name="wave" style={{fontSize: 25}} />
-        <Text style={styles.h2}>Подпишись</Text>
-      </View>
-      <SocialButtons />
-      <Text style={styles.link}>Публичная оферта</Text>
-      <Text style={styles.link}>Политика конфиденциальности</Text>
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.settings}>
+          <Icon name="bell" color="#505050" size={30} style={styles.icon} />
+          <Icon name="settings" color="#505050" size={30} style={styles.icon} />
+        </View>
+        <View style={styles.logoWrapper}>
+          <Image
+            source={require("../../assets/images/logo.png")}
+            style={styles.logo}
+            resizeMode="contain"
+          />
+        </View>
+        <Text style={styles.h1}>Клуб Финансового Рая</Text>
+        <ListClubFeatures />
+        <View style={styles.h2_wrapper}>
+          <Emoji name="gift" style={{fontSize: 25}} />
+          <Text style={styles.h2}>Бесплатно</Text>
+        </View>
+        <ListFreeLibrary />
+        <View style={styles.h2_wrapper}>
+          <Emoji name="trophy" style={{fontSize: 25}} />
+          <Text style={styles.h2}>По подписке</Text>
+        </View>
+        <ListPaydLibrary />
+        <View style={styles.h2_wrapper}>
+          <Emoji name="wave" style={{fontSize: 25}} />
+          <Text style={styles.h2}>Подпишись</Text>
+        </View>
+        <SocialButtons />
+        <Text style={styles.link}>Публичная оферта</Text>
+        <Text style={styles.link}>Политика конфиденциальности</Text>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -51,6 +60,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f2f3f5DD",
+    paddingTop: StatusBar.currentHeight || 0,
   },
   settings: {
     position: "absolute",

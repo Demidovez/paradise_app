@@ -5,11 +5,19 @@ export interface IAction {
   payload: any | null;
 }
 
+export interface IUser {
+  id: number,
+  name: string,
+  color: string,
+  image?: string
+}
+
 export interface IComment {
   id: number;
   article: string;
   date: Date;
   text: string;
+  user: IUser
 }
 
 export interface IMaterialCategory {

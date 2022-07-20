@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, View, Text, StatusBar} from 'react-native';
+import React from "react";
+import {StyleSheet, View, Text, StatusBar} from "react-native";
 
 function EventsPage() {
   return (
@@ -14,5 +14,6 @@ export default React.memo(EventsPage);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: StatusBar.currentHeight || 0,
   },
 });

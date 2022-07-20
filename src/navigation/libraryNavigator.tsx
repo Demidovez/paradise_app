@@ -1,5 +1,5 @@
-import React, {useCallback, useMemo} from "react";
-import {View, StatusBar, StyleSheet} from "react-native";
+import React, {useMemo} from "react";
+import {View, StyleSheet} from "react-native";
 import {
   createNativeStackNavigator,
   NativeStackScreenProps,
@@ -41,45 +41,28 @@ export default function LibraryNavigator() {
     [],
   );
 
-  const screenListeners = useCallback(
-    ({navigation, route}) => ({
-      focus: (e: any) => {
-        switch (route.name) {
-          case Routes.LibraryHome:
-          case Routes.MaterialPage:
-            StatusBar.setBackgroundColor("#FFFFFF");
-            break;
-          case Routes.MaterialCategory:
-            StatusBar.setBackgroundColor("#f2f3f5DD");
-            break;
-        }
-      },
-    }),
-    [],
-  );
-
   return (
     <View style={style}>
       <LibraryStack.Navigator
         screenOptions={options}
-        screenListeners={screenListeners}
         initialRouteName={Routes.LibraryHome}>
         <LibraryStack.Screen
           name={Routes.LibraryHome}
           component={LibraryPage}
+          options={{animation: "fade"}}
         />
         <LibraryStack.Screen
           name={Routes.MaterialCategory}
           component={MaterialCategory}
           options={{
-            animation: "none",
+            animation: "fade",
           }}
         />
         <LibraryStack.Screen
           name={Routes.MaterialPage}
           component={MaterialPage}
           options={{
-            animation: "none",
+            animation: "fade",
           }}
         />
       </LibraryStack.Navigator>

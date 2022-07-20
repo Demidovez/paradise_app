@@ -1,16 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import {StyleSheet, View, Text, ScrollView, StatusBar} from "react-native";
 import SearchMaterials from "../components/SearchMaterials";
 import {Routes} from "../navigation/routes";
 import Style from "../style/Light";
 import * as RootNavigation from "../navigation/rootNavigation";
 import {IMaterialCategory} from "../types/types";
+import MaterialCategoryCard from "../components/MaterialCategoryCard";
 
 function LibraryPage() {
   const [categories, setCategories] = useState<IMaterialCategory[]>([]);
@@ -78,19 +73,7 @@ function LibraryPage() {
       <SearchMaterials />
       <View style={styles.materials}>
         {categories.map(category => (
-          <TouchableOpacity
-            key={category.title}
-            style={styles.material_card}
-            onPress={() => goToCategory(category)}>
-            <View
-              style={[
-                styles.background_card,
-                {backgroundColor: category.color},
-              ]}>
-              <Text style={styles.icon}>{category.icon}</Text>
-            </View>
-            <Text style={styles.title}>{category.title}</Text>
-          </TouchableOpacity>
+          <MaterialCategoryCard category={category} onPress={goToCategory} />
         ))}
       </View>
     </ScrollView>
@@ -104,7 +87,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ffffff",
     padding: 20,
-    paddingTop: 0,
+    paddingTop: StatusBar.currentHeight || 0,
   },
   h1: {
     ...Style.font_bold,
@@ -119,27 +102,5 @@ const styles = StyleSheet.create({
     marginStart: -10,
     marginEnd: -10,
     marginTop: 10,
-  },
-  material_card: {
-    marginTop: 20,
-    width: "33.3%",
-  },
-  background_card: {
-    height: 150,
-    alignItems: "center",
-    justifyContent: "center",
-    marginStart: 10,
-    marginEnd: 10,
-    borderRadius: 15,
-  },
-  title: {
-    ...Style.font_bold,
-    fontSize: 14,
-    paddingTop: 5,
-    textAlign: "center",
-  },
-  icon: {
-    fontSize: 30,
-    color: "#000000",
   },
 });

@@ -1,9 +1,10 @@
 import React, {useState} from "react";
-import {StyleSheet, View, Text} from "react-native";
+import {StyleSheet, View, Text, StatusBar} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import UserContentTabs from "../components/UserContentTabs";
 import Style from "../style/Light";
 import Emoji from "react-native-emoji";
+import Avatar from "../components/Avatar";
 
 function User() {
   const [avatarColor] = useState("#D95DE944");
@@ -13,14 +14,7 @@ function User() {
   return (
     <View style={styles.container}>
       <View style={styles.account}>
-        <View style={[styles.user, {backgroundColor: avatarColor}]}>
-          <Text style={styles.name_avatar}>
-            {fullname
-              .split(" ")
-              .map(part => part[0])
-              .slice(0, 2)}
-          </Text>
-        </View>
+        <Avatar name={fullname} color={avatarColor} />
         <View style={styles.profile}>
           <Text style={styles.name}>{fullname}</Text>
           <Text style={styles.email}>nikolaydemidovez@gmail.com</Text>
@@ -63,6 +57,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f2f3f5DD",
+    paddingTop: StatusBar.currentHeight || 0,
   },
   account: {
     marginTop: 10,
@@ -70,7 +65,6 @@ const styles = StyleSheet.create({
     marginEnd: 20,
     marginBottom: 10,
     flexDirection: "row",
-    // backgroundColor: 'gray',
   },
   user: {
     backgroundColor: "#FFFFFF",
