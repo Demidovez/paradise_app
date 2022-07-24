@@ -5,8 +5,6 @@ import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 import {Routes} from "./routes";
-import {useAppSelector} from "../hooks";
-import {Selectors} from "../redux/selectors/selectors";
 import MaterialCategory from "../pages/MaterialCategory";
 import {IMaterial, IMaterialCategory} from "../types/types";
 import LibraryPage from "../pages/Library";
@@ -14,7 +12,7 @@ import MaterialPage from "../pages/Material";
 
 export type TLibraryStackParamList = {
   [Routes.MaterialCategory]: {category: IMaterialCategory};
-  [Routes.MaterialPage]: {id: IMaterial};
+  [Routes.MaterialPage]: {id: string};
   [Routes.LibraryHome]: undefined;
 };
 
@@ -27,12 +25,7 @@ const LibraryStack = createNativeStackNavigator<TLibraryStackParamList>();
 export default function LibraryNavigator() {
   // console.log("Library");
 
-  const theme = useAppSelector(Selectors.getTheme);
-
-  const style = useMemo(
-    () => [styles.container, {backgroundColor: theme.colors.background}],
-    [theme],
-  );
+  const style = useMemo(() => [styles.container], []);
 
   const options = useMemo(
     () => ({

@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {FlatList, View, Text, StyleSheet} from 'react-native';
-import SvgImage from './SvgImage';
-import Style from '../style/Light';
-import Icon from 'react-native-vector-icons/Entypo';
+import React, {useEffect, useState} from "react";
+import {View, Text, StyleSheet} from "react-native";
+import Style from "../style/Light";
+import Icon from "react-native-vector-icons/Entypo";
 
 interface IList {
   title: string;
@@ -16,34 +15,34 @@ function ListFreeLibrary() {
   useEffect(() => {
     setList([
       {
-        title: 'Статьи',
-        desc: 'Самые интересные статьи обо всём и всем',
-        icon: 'browser',
+        title: "Статьи",
+        desc: "Самые интересные статьи обо всём и всем",
+        icon: "browser",
       },
       {
-        title: 'Нормативы',
-        desc: 'Что говорит нам закон',
-        icon: 'text',
+        title: "Нормативы",
+        desc: "Что говорит нам закон",
+        icon: "text",
       },
       {
-        title: 'Бух учет',
-        desc: 'Бухгалтерский учет от А до Я',
-        icon: 'newsletter',
+        title: "Бух учет",
+        desc: "Бухгалтерский учет от А до Я",
+        icon: "newsletter",
       },
       {
-        title: 'Памятки',
-        desc: 'Напоминаем, что нужно делать если...',
-        icon: 'open-book',
+        title: "Памятки",
+        desc: "Напоминаем, что нужно делать если...",
+        icon: "open-book",
       },
       {
-        title: 'Инструкции',
-        desc: 'Пошагово показываем, что и как делать',
-        icon: 'list',
+        title: "Инструкции",
+        desc: "Пошагово показываем, что и как делать",
+        icon: "list",
       },
       {
-        title: 'Популярные вопросы',
-        desc: 'Отвечаем на самые главные вопросы',
-        icon: 'help',
+        title: "Популярные вопросы",
+        desc: "Отвечаем на самые главные вопросы",
+        icon: "help",
       },
     ]);
   }, []);
@@ -53,7 +52,7 @@ function ListFreeLibrary() {
       {list.map(item => (
         <View style={styles.list_item} key={item.title}>
           <View style={[styles.card]}>
-            <Icon name={item.icon} color={'black'} size={30} />
+            <Icon name={item.icon} color={"black"} size={30} />
           </View>
           <View style={styles.content}>
             <Text style={styles.title}>{item.title}</Text>
@@ -77,21 +76,21 @@ const styles = StyleSheet.create({
     // flex: 1,
     // paddingEnd: 24,
     padding: 14,
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    flexDirection: "row",
     marginBottom: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 15,
     elevation: 20,
-    shadowColor: '#D4D4D4',
+    shadowColor: "#D4D4D4",
   },
   card: {
     minWidth: 60,
     minHeight: 60,
     borderRadius: 100,
-    backgroundColor: '#edededAA',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#edededAA",
+    justifyContent: "center",
+    alignItems: "center",
   },
   content: {width: 0, flexGrow: 1},
   title: {

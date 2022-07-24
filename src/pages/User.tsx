@@ -1,23 +1,25 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {StyleSheet, View, Text, StatusBar} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import UserContentTabs from "../components/UserContentTabs";
 import Style from "../style/Light";
 import Emoji from "react-native-emoji";
 import Avatar from "../components/Avatar";
+import {useAppSelector} from "../hooks/redux";
 
 function User() {
-  const [avatarColor] = useState("#D95DE944");
+  const {first_name, last_name, parent_name, avatar_color, email} =
+    useAppSelector(state => state.userReducer);
 
-  const [fullname] = useState("Демидовец Николай Михайлович");
+  const [fullname] = useState(`${first_name} ${last_name} ${parent_name}`);
 
   return (
     <View style={styles.container}>
       <View style={styles.account}>
-        <Avatar name={fullname} color={avatarColor} />
+        <Avatar name={fullname} color={avatar_color} />
         <View style={styles.profile}>
           <Text style={styles.name}>{fullname}</Text>
-          <Text style={styles.email}>nikolaydemidovez@gmail.com</Text>
+          <Text style={styles.email}>{email}</Text>
           <Text style={styles.status}>Членство оформлено</Text>
 
           <View style={styles.controls}>
@@ -46,7 +48,7 @@ function User() {
         <Emoji name="trophy" style={{fontSize: 25}} />
         <Text style={styles.label_subscribe}>Членство в клубе</Text>
       </View>
-      <UserContentTabs />
+      {/* <UserContentTabs /> */}
     </View>
   );
 }

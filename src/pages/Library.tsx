@@ -1,64 +1,22 @@
 import React, {useEffect, useState} from "react";
-import {StyleSheet, View, Text, ScrollView, StatusBar} from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  StatusBar,
+  ActivityIndicator,
+} from "react-native";
 import SearchMaterials from "../components/SearchMaterials";
 import {Routes} from "../navigation/routes";
 import Style from "../style/Light";
 import * as RootNavigation from "../navigation/rootNavigation";
 import {IMaterialCategory} from "../types/types";
 import MaterialCategoryCard from "../components/MaterialCategoryCard";
+import {useGetCategoriesQuery} from "../store/api/MaterialsService";
 
 function LibraryPage() {
-  const [categories, setCategories] = useState<IMaterialCategory[]>([]);
-
-  useEffect(() => {
-    setCategories([
-      {
-        title: "Статьи",
-        icon: "📑",
-        color: "#e6f5f9",
-      },
-      {
-        title: "Новости",
-        icon: "📰",
-        color: "#f4f5f9",
-      },
-      {
-        title: "Уроки",
-        icon: "📕",
-        color: "#f1e7ff",
-      },
-      {
-        title: "Тесты",
-        icon: "💻",
-        color: "#ffeee1",
-      },
-      {
-        title: "Видео",
-        icon: "🎥",
-        color: "#f9f8f2",
-      },
-      {
-        title: "Опросы",
-        icon: "📣",
-        color: "#F4FFD2",
-      },
-      {
-        title: "Курсы",
-        icon: "🎓",
-        color: "#FFCFD7",
-      },
-      {
-        title: "Калькуляторы",
-        icon: "🧮",
-        color: "#FFF3D0",
-      },
-      {
-        title: "Прочее",
-        icon: "🚀",
-        color: "#eefcef",
-      },
-    ]);
-  }, []);
+  const {data: categories, isLoading} = useGetCategoriesQuery();
 
   const goToCategory = (category: IMaterialCategory) => {
     RootNavigation.navigate(Routes.Library, {
@@ -68,15 +26,27 @@ function LibraryPage() {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.h1}>Материалы клуба</Text>
-      <SearchMaterials />
-      <View style={styles.materials}>
-        {categories.map(category => (
-          <MaterialCategoryCard category={category} onPress={goToCategory} />
-        ))}
-      </View>
-    </ScrollView>
+      {isLoading ? (
+        <View style={styles.loader}>
+          <ActivityIndicator size="large" color={"#a1a0a0"} />
+        </View>
+      ) : (
+        <ScrollView>
+          <SearchMaterials />
+          <View style={styles.materials}>
+            {categories?.map(category => (
+              <MaterialCategoryCard
+                category={category}
+                onPress={goToCategory}
+                key={category.title}
+              />
+            ))}
+          </View>
+        </ScrollView>
+      )}
+    </View>
   );
 }
 
@@ -102,5 +72,11 @@ const styles = StyleSheet.create({
     marginStart: -10,
     marginEnd: -10,
     marginTop: 10,
+  },
+  loader: {
+    flex: 1,
+    alignSelf: "center",
+    justifyContent: "center",
+    transform: [{scale: 1.5}],
   },
 });

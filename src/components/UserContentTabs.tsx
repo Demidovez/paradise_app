@@ -18,7 +18,7 @@ const Tab = createMaterialTopTabNavigator();
 
 function UserContentTabs() {
   const [comments, setComments] = useState<IComment[]>([]);
-  const [favorites, setFavorites] = useState<IMaterial[]>([]);
+  const [likes, setlikes] = useState<IMaterial[]>([]);
 
   useEffect(() => {
     const comments: IComment[] = [
@@ -56,14 +56,14 @@ function UserContentTabs() {
 
     setComments(comments);
 
-    const favorites: IMaterial[] = [
+    const likes: IMaterial[] = [
       {
         id: 0,
         title: "Советы начинающему бухгалтеру",
         date: new Date(),
         desc: "Рассказываем самые лучшие советы бухгалтеру, вступившему на тернистый путь бехгалтерии",
         comments: 120,
-        favorites: 67,
+        likes: 67,
       },
       {
         id: 1,
@@ -71,7 +71,7 @@ function UserContentTabs() {
         date: new Date("07/03/2022"),
         desc: "Что, где, когда искать новых клиентов? Почему один новый лучше двух старых? На каких площадках следует искать?",
         comments: 10,
-        favorites: 5,
+        likes: 5,
       },
       {
         id: 2,
@@ -79,7 +79,7 @@ function UserContentTabs() {
         date: new Date("12/14/2022"),
         desc: "Знали ли Вы хотябы 5 лучших инструментов? А мы знаем! И Вам расскажем!",
         comments: 89,
-        favorites: 13,
+        likes: 13,
       },
       {
         id: 3,
@@ -87,7 +87,7 @@ function UserContentTabs() {
         date: new Date("01/02/2022"),
         desc: "Новости из мира бухгалтерии. На что следует акцентировать внимание, а на что нужно забить.",
         comments: 56,
-        favorites: 9,
+        likes: 9,
       },
       {
         id: 4,
@@ -95,11 +95,11 @@ function UserContentTabs() {
         date: new Date("10/19/2022"),
         desc: "Наш новый курс с новыми идеями, секретами и методикам. Ждем Вас здесь и сейчас!",
         comments: 23,
-        favorites: 4,
+        likes: 4,
       },
     ];
 
-    setFavorites(favorites);
+    setlikes(likes);
   }, []);
 
   const CommentsTab = useCallback(() => {
@@ -123,7 +123,7 @@ function UserContentTabs() {
     );
   }, [comments]);
 
-  const FavoritesTab = () => {
+  const likesTab = () => {
     const renderItem = ({item}: any) => (
       <View
         style={{
@@ -137,7 +137,7 @@ function UserContentTabs() {
 
     return (
       <FlatList
-        data={favorites}
+        data={likes}
         renderItem={renderItem}
         keyExtractor={item => "" + item.id}
       />
@@ -171,8 +171,8 @@ function UserContentTabs() {
           }}
         />
         <Tab.Screen
-          name="Favorites"
-          component={FavoritesTab}
+          name="likes"
+          component={likesTab}
           options={{
             tabBarLabel: ({focused}) => (
               <Text

@@ -5,18 +5,18 @@ import Style from "../style/Light";
 
 interface IProps {
   comments: number;
-  favorites: number;
+  likes: number;
 }
 
-function CounterLikesAndComments({comments, favorites}: IProps) {
-  const [isFavorite, setIsFavorite] = useState(false);
+function CounterLikesAndComments({comments, likes}: IProps) {
+  const [isLike, setIsLike] = useState(false);
 
   const [commentsCount] = useState(comments);
-  const [favoritesCount, setFavoritesCount] = useState(favorites);
+  const [likesCount, setlikesCount] = useState(likes);
 
-  const onSetFavorite = () => {
-    setIsFavorite(!isFavorite);
-    setFavoritesCount(isFavorite ? favoritesCount - 1 : favoritesCount + 1);
+  const onSetLike = () => {
+    setIsLike(!isLike);
+    setlikesCount(isLike ? likesCount - 1 : likesCount + 1);
   };
 
   return (
@@ -25,9 +25,9 @@ function CounterLikesAndComments({comments, favorites}: IProps) {
         <Icon name={"comment-o"} color={"#00000055"} size={25} />
         <Text style={styles.icon_count}>{commentsCount}</Text>
       </View>
-      <TouchableOpacity style={styles.icon} onPress={onSetFavorite}>
-        <Text style={styles.icon_count}>{favoritesCount}</Text>
-        {isFavorite ? (
+      <TouchableOpacity style={styles.icon} onPress={onSetLike}>
+        <Text style={styles.icon_count}>{likesCount}</Text>
+        {isLike ? (
           <Icon name={"heart"} color={"#d63031"} size={25} />
         ) : (
           <Icon name={"heart-o"} color={"#00000055"} size={25} />

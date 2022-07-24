@@ -21,7 +21,7 @@ function Material(props: TLibraryStackScreenProps<Routes.MaterialPage>) {
         <View style={styles.content}>
           <ContentJSON data={data} />
         </View>
-        <CounterLikesAndComments comments={10} favorites={37} />
+        <CounterLikesAndComments comments={10} likes={37} />
         <MaterialComments />
       </ScrollView>
     </View>

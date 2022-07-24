@@ -6,10 +6,14 @@ export interface IAction {
 }
 
 export interface IUser {
-  id: number,
-  name: string,
-  color: string,
-  image?: string
+  id: string;
+  first_name: string;
+  last_name: string;
+  parent_name: string;
+  email: string;
+  roles: string[];
+  avatar_color: string;
+  image: string;
 }
 
 export interface IComment {
@@ -17,20 +21,21 @@ export interface IComment {
   article: string;
   date: Date;
   text: string;
-  user: IUser
+  user: IUser;
 }
 
 export interface IMaterialCategory {
+  id: string;
   title: string;
   icon: string;
   color: string;
 }
 
 export interface IMaterial {
-  id: number;
+  id: string;
   title: string;
   date: Date;
   desc: string;
-  comments: number;
-  favorites: number;
+  comments: string[];
+  likes: string[];
 }

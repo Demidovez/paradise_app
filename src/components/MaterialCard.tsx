@@ -13,16 +13,19 @@ import {IMaterial} from "../types/types";
 import moment from "moment";
 import * as RootNavigation from "../navigation/rootNavigation";
 import {Routes} from "../navigation/routes";
+import {useAppSelector} from "../hooks/redux";
 
 interface IProps {
   material: IMaterial;
 }
 
 function MaterialCard({material}: IProps) {
-  const [isFavorite, setIsFavorite] = useState(true);
+  const {id: userId} = useAppSelector(state => state.userReducer);
 
-  const [commentsCount] = useState(material.comments);
-  const [favoritesCount, setFavoritesCount] = useState(material.favorites);
+  const [isLike, setIsLike] = useState(material.likes.includes(userId));
+
+  const [commentsCount] = useState(material.comments.length);
+  const [likesCount, setlikesCount] = useState(material.likes.length);
 
   const scaleAnim = useRef(new Animated.Value(0)).current;
 
@@ -42,9 +45,9 @@ function MaterialCard({material}: IProps) {
     }).start();
   };
 
-  const onSetFavorite = () => {
-    setIsFavorite(!isFavorite);
-    setFavoritesCount(isFavorite ? favoritesCount - 1 : favoritesCount + 1);
+  const onSetLike = () => {
+    setIsLike(!isLike);
+    setlikesCount(isLike ? likesCount - 1 : likesCount + 1);
   };
 
   const goToCategory = () => {
@@ -86,9 +89,9 @@ function MaterialCard({material}: IProps) {
             <Icon name={"comment-o"} color={"#00000055"} size={25} />
             <Text style={styles.icon_count}>{commentsCount}</Text>
           </View>
-          <TouchableOpacity style={styles.icon} onPress={onSetFavorite}>
-            <Text style={styles.icon_count}>{favoritesCount}</Text>
-            {isFavorite ? (
+          <TouchableOpacity style={styles.icon} onPress={onSetLike}>
+            <Text style={styles.icon_count}>{likesCount || null}</Text>
+            {isLike ? (
               <Icon name={"heart"} color={"#d63031"} size={25} />
             ) : (
               <Icon name={"heart-o"} color={"#00000055"} size={25} />

@@ -1,19 +1,18 @@
 import React, {useCallback} from "react";
-import {useAppSelector} from "../hooks";
+import {useAppSelector} from "../hooks/redux";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {View, StyleSheet} from "react-native";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import HomePage from "../pages/Home";
 import UserPage from "../pages/User";
-import EventsPage from "../pages/Events";
+import FeedPage from "../pages/Feed";
 import {Routes} from "./routes";
-import {Selectors} from "../redux/selectors/selectors";
 import Icon from "react-native-vector-icons/SimpleLineIcons";
 import LibraryNavigator from "./libraryNavigator";
 
 export type TTabsStackParamList = {
   [Routes.Home]: undefined;
-  [Routes.Events]: undefined;
+  [Routes.Feed]: undefined;
   [Routes.User]: undefined;
   [Routes.Library]: undefined;
 };
@@ -26,17 +25,17 @@ const TabsStack = createBottomTabNavigator<TTabsStackParamList>();
 export default function Tabs() {
   // console.log("Tabs");
 
-  const theme = useAppSelector(Selectors.getTheme);
+  const theme = useAppSelector(state => state.settingsReducer.theme);
 
   const screenOptions = useCallback(
     ({route}: any) => ({
       headerStyle: {
-        backgroundColor: theme.colors.headerBar,
+        // backgroundColor: theme.colors.headerBar,
         elevation: 0,
         shadowOpacity: 0,
         borderBottomWidth: 0,
       },
-      headerTintColor: theme.colors.primary,
+      // headerTintColor: theme.colors.primary,
       headerTitleStyle: {
         fontFamily: "Nunito-Bold",
       },
@@ -53,7 +52,7 @@ export default function Tabs() {
           case Routes.Home:
             iconName = "home";
             break;
-          case Routes.Events:
+          case Routes.Feed:
             iconName = "bell";
             break;
           case Routes.User:
@@ -73,7 +72,7 @@ export default function Tabs() {
         {
           borderTopWidth: 0,
           elevation: 0,
-          backgroundColor: theme.colors.headerBar,
+          // backgroundColor: theme.colors.headerBar,
         },
       ],
     }),
@@ -91,8 +90,8 @@ export default function Tabs() {
           }}
         />
         <TabsStack.Screen
-          name={Routes.Events}
-          component={EventsPage}
+          name={Routes.Feed}
+          component={FeedPage}
           options={{
             headerShown: false,
           }}

@@ -1,15 +1,15 @@
 import React from "react";
 import {StyleSheet, View, Text, StatusBar} from "react-native";
 
-function EventsPage() {
+function FeedPage() {
   return (
     <View style={styles.container}>
-      <Text>EventsPage</Text>
+      <Text>FeedPage</Text>
     </View>
   );
 }
 
-export default React.memo(EventsPage);
+export default React.memo(FeedPage);
 
 const styles = StyleSheet.create({
   container: {
