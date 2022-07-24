@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback} from "react";
 import {
   StyleSheet,
   View,
   StatusBar,
   FlatList,
   ActivityIndicator,
+  ListRenderItem,
 } from "react-native";
 import {TLibraryStackScreenProps} from "../navigation/libraryNavigator";
 import {Routes} from "../navigation/routes";
@@ -18,18 +19,27 @@ function MaterialCategory(
 ) {
   const {category} = props.route.params;
 
-  const {data: materials, isLoading} = useGetMaterialsQuery(category.id);
+  const {data: materials, isFetching} = useGetMaterialsQuery(category.id, {
+    refetchOnMountOrArgChange: true,
+  });
 
-  const renderItem = ({item}: any) => (
-    <View style={styles.item}>
-      <MaterialCard material={item} />
-    </View>
+  const renderItem: ListRenderItem<IMaterial> = useCallback(
+    ({item, index}) => (
+      <View
+        style={[
+          styles.item,
+          materials?.length === index + 1 && {paddingBottom: 30},
+        ]}>
+        <MaterialCard material={item} />
+      </View>
+    ),
+    [materials],
   );
 
   return (
     <View style={styles.container}>
       <TitleBar title={category.title} />
-      {isLoading ? (
+      {isFetching ? (
         <View style={styles.loader}>
           <ActivityIndicator size="large" color={"#a1a0a0"} />
         </View>
@@ -38,6 +48,7 @@ function MaterialCategory(
           data={materials}
           renderItem={renderItem}
           keyExtractor={item => "" + item.id}
+          style={styles.list}
         />
       )}
     </View>
@@ -62,5 +73,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     transform: [{scale: 1.5}],
+  },
+  list: {
+    paddingTop: 5,
   },
 });

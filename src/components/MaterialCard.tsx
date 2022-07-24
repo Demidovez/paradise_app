@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Animated,
+  Image,
+  Dimensions,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Style from "../style/Light";
@@ -14,6 +16,8 @@ import moment from "moment";
 import * as RootNavigation from "../navigation/rootNavigation";
 import {Routes} from "../navigation/routes";
 import {useAppSelector} from "../hooks/redux";
+import {useImageAspectRatio} from "../hooks/useImageAspectRatio";
+import LinearGradient from "react-native-linear-gradient";
 
 interface IProps {
   material: IMaterial;
@@ -22,12 +26,16 @@ interface IProps {
 function MaterialCard({material}: IProps) {
   const {id: userId} = useAppSelector(state => state.userReducer);
 
-  const [isLike, setIsLike] = useState(material.likes.includes(userId));
+  const [isLike, setIsLike] = useState(
+    material.users_liked_ids.includes(userId),
+  );
 
-  const [commentsCount] = useState(material.comments.length);
-  const [likesCount, setlikesCount] = useState(material.likes.length);
+  const [commentsCount] = useState(material.comments_ids.length);
+  const [likesCount, setlikesCount] = useState(material.users_liked_ids.length);
 
   const scaleAnim = useRef(new Animated.Value(0)).current;
+
+  const aspectRatio = useImageAspectRatio(material.image);
 
   const handlePressIn = () => {
     Animated.timing(scaleAnim, {
@@ -76,10 +84,35 @@ function MaterialCard({material}: IProps) {
             ],
           },
         ]}>
+        {material.image ? (
+          <View>
+            <Image
+              style={[styles.image, {aspectRatio}]}
+              source={{
+                uri: material.image,
+              }}
+            />
+            <View style={styles.image_background} />
+            <View style={styles.image_footer}>
+              <Text style={[styles.article, {color: "white", opacity: 1}]}>
+                {material.title}
+              </Text>
+              <Text style={[styles.date, {color: "white"}]}>
+                {moment(material.date).format("LL")}
+              </Text>
+            </View>
+          </View>
+        ) : null}
         <View style={styles.wrapper}>
-          <Text style={styles.article}>{material.title}</Text>
-          <Text style={styles.date}>{moment(material.date).format("LL")}</Text>
-          <View style={styles.separator} />
+          {!material.image ? (
+            <View>
+              <Text style={styles.article}>{material.title}</Text>
+              <Text style={styles.date}>
+                {moment(material.date).format("LL")}
+              </Text>
+              <View style={styles.separator} />
+            </View>
+          ) : null}
           <View style={styles.content}>
             <Text style={styles.text}>{material.desc}...</Text>
           </View>
@@ -87,7 +120,7 @@ function MaterialCard({material}: IProps) {
         <View style={styles.icons}>
           <View style={styles.icon}>
             <Icon name={"comment-o"} color={"#00000055"} size={25} />
-            <Text style={styles.icon_count}>{commentsCount}</Text>
+            <Text style={styles.icon_count}>{commentsCount || null}</Text>
           </View>
           <TouchableOpacity style={styles.icon} onPress={onSetLike}>
             <Text style={styles.icon_count}>{likesCount || null}</Text>
@@ -112,6 +145,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     elevation: 20,
     shadowColor: "#D4D4D4",
+    overflow: "hidden",
   },
   wrapper: {
     padding: 15,
@@ -120,11 +154,12 @@ const styles = StyleSheet.create({
   article: {
     ...Style.font_bold,
     opacity: 0.8,
-    fontSize: 16,
+    fontSize: 17,
   },
   date: {
     ...Style.font,
-    fontSize: 12,
+    fontSize: 13,
+    paddingTop: 3,
     color: "gray",
   },
   separator: {
@@ -161,5 +196,23 @@ const styles = StyleSheet.create({
     color: "gray",
     marginStart: 10,
     marginEnd: 10,
+  },
+  image_footer: {
+    position: "absolute",
+    width: "100%",
+    bottom: 0,
+    padding: 10,
+    paddingTop: 30,
+  },
+  image_background: {
+    backgroundColor: "#00000088",
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+  },
+  image: {
+    width: "100%",
+    minWidth: "100%",
+    maxHeight: Dimensions.get("window").width * 0.7,
   },
 });

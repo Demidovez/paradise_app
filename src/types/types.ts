@@ -36,6 +36,7 @@ export interface IMaterial {
   title: string;
   date: Date;
   desc: string;
-  comments: string[];
-  likes: string[];
+  image: string;
+  users_liked_ids: string[];
+  comments_ids: string[];
 }
